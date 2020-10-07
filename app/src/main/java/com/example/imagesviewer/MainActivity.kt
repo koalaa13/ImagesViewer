@@ -1,13 +1,14 @@
 package com.example.imagesviewer
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+import java.util.concurrent.ConcurrentHashMap
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     var imagesList = emptyList<Image>().toMutableList()
+    private val imagesMap = ConcurrentHashMap<String, Bitmap>()
     private val fullhdImagesDownloads: Queue<DownloadImage> = LinkedList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,11 +38,12 @@ class MainActivity : AppCompatActivity() {
 
         myRecyclerView.apply {
             layoutManager = viewManager
-            adapter = ImageAdapter(imagesList) {
+            adapter = ImageAdapter(imagesList, imagesMap) {
                 fullhdImagesDownloads.add(
                     DownloadImage(
+                        imagesMap,
                         fullhd_image,
-                        listOf<View>(fullhd_image_downloading_progressbar)
+                        listOf(fullhd_image_downloading_progressbar)
                     )
                 )
                 fullhdImagesDownloads.peek()?.execute(it.fullLink)

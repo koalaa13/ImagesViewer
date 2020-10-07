@@ -16,7 +16,7 @@ class ImagesGetter(
     companion object {
         private const val TAG = "ImagesGetter"
         private const val ACCESS_KEY = "KwInqRg7a2rW1mivmJ4n2itI2_0roNjh5wcCkwDCAx8"
-        private const val THEME = "cat"
+        private const val THEME = "japan"
         private const val ORIENTATION = "portrait"
         private const val FULL_URL: String =
             "https://api.unsplash.com/search/photos?per_page=50&query=$THEME&client_id=$ACCESS_KEY&orientation=$ORIENTATION"
@@ -53,7 +53,7 @@ class ImagesGetter(
                     } else {
                         titleValue.asString
                     },
-                    fullLink = image.asJsonObject.get("urls").asJsonObject.get("full").asString,
+                    fullLink = image.asJsonObject.get("urls").asJsonObject.get("regular").asString,
                     thumbLink = image.asJsonObject.get("urls").asJsonObject.get("thumb").asString
                 )
                 imagesList.add(toAdd)
