@@ -3,7 +3,7 @@ package com.example.imagesviewer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,6 +23,9 @@ class MainActivity : AppCompatActivity() {
 
         fullhd_image.setOnClickListener {
             it.visibility = View.GONE
+            if (it is ImageView) {
+                it.setImageResource(R.drawable.no_image)
+            }
         }
 
         myRecyclerView.apply {
