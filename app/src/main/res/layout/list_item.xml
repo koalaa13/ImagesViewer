@@ -14,20 +14,18 @@
 
         <ImageView
             android:id="@+id/thumb_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/no_image" />
 
         <TextView
             android:id="@+id/image_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/no_title_image"/>
-
-        <TextView
-            android:id="@+id/image_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/image_not_downloaded" />
+            android:gravity="center_horizontal"
+            android:text="@string/no_title_image"
+            android:textAlignment="center" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

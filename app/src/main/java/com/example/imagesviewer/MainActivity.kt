@@ -2,6 +2,7 @@ package com.example.imagesviewer
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,17 +20,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Log.i(TAG, "onCreate")
         val viewManager = LinearLayoutManager(this)
-        container.apply {
+
+        fullhd_image.setOnClickListener {
+            it.visibility = View.GONE
+        }
+
+        myRecyclerView.apply {
             layoutManager = viewManager
             adapter = ImageAdapter(imagesList) {
-                Toast.makeText(
-                    this@MainActivity,
-                    "Clicked on image# $it",
-                    Toast.LENGTH_SHORT
-                ).show()
+                DownloadImage(fullhd_image).execute(it.fullLink)
+                fullhd_image.visibility = View.VISIBLE
             }
         }
 
-        ImagesGetter(imagesList, container.adapter).execute()
+        ImagesGetter(imagesList, myRecyclerView.adapter).execute()
     }
 }
