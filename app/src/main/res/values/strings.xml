@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ImagesViewer</string>
+    <string name="image_not_downloaded">Not downloaded</string>
+    <string name="no_title_image">There is no title for this image</string>
+</resources>
