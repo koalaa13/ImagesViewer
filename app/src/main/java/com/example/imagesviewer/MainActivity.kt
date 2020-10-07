@@ -7,6 +7,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -14,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     var imagesList = emptyList<Image>().toMutableList()
+    private val fullhdImagesDownloads: Queue<DownloadImage> = LinkedList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +24,10 @@ class MainActivity : AppCompatActivity() {
         val viewManager = LinearLayoutManager(this)
 
         fullhd_image.setOnClickListener {
+            while (!fullhdImagesDownloads.isEmpty()) {
+                val cur = fullhdImagesDownloads.poll()
+                cur?.cancel(true)
+            }
             it.visibility = View.GONE
             if (it is ImageView) {
                 it.setImageResource(R.drawable.no_image)
@@ -31,7 +37,8 @@ class MainActivity : AppCompatActivity() {
         myRecyclerView.apply {
             layoutManager = viewManager
             adapter = ImageAdapter(imagesList) {
-                DownloadImage(fullhd_image).execute(it.fullLink)
+                fullhdImagesDownloads.add(DownloadImage(fullhd_image))
+                fullhdImagesDownloads.peek()?.execute(it.fullLink)
                 fullhd_image.visibility = View.VISIBLE
             }
         }

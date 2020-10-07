@@ -26,7 +26,7 @@ class DownloadImage(private val image: ImageView) : AsyncTask<String, Unit, Bitm
     }
 
     override fun onPostExecute(result: Bitmap?) {
-        if (result != null) {
+        if (result != null && !isCancelled) {
             Log.i(TAG, "Set bitmap for image")
             image.setImageBitmap(result)
         }
