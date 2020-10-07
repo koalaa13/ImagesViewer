@@ -12,12 +12,25 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <ImageView
-            android:id="@+id/thumb_image"
+        <FrameLayout
+            android:id="@+id/fullhd_image_container"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:src="@drawable/no_image" />
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/thumb_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/thumb_image_downloading_progressbar"
+                style="@style/progressBarStyle.lightBackGround"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center" />
+        </FrameLayout>
 
         <TextView
             android:id="@+id/image_title"

@@ -4,12 +4,17 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.AsyncTask
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import java.io.IOException
 import java.net.URL
 
 
-class DownloadImage(private val image: ImageView) : AsyncTask<String, Unit, Bitmap?>() {
+class DownloadImage(
+    private val image: ImageView,
+    private var toMakeInvisible: List<View> = emptyList()
+) :
+    AsyncTask<String, Unit, Bitmap?>() {
     companion object {
         const val TAG = "DownloadImage"
     }
@@ -29,6 +34,10 @@ class DownloadImage(private val image: ImageView) : AsyncTask<String, Unit, Bitm
         if (result != null && !isCancelled) {
             Log.i(TAG, "Set bitmap for image")
             image.setImageBitmap(result)
+            for (v in toMakeInvisible) {
+                v.visibility = View.GONE
+            }
+            image.visibility = View.VISIBLE
         }
     }
 }

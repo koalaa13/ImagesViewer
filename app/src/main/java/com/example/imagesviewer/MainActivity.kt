@@ -23,23 +23,28 @@ class MainActivity : AppCompatActivity() {
         Log.i(TAG, "onCreate")
         val viewManager = LinearLayoutManager(this)
 
-        fullhd_image.setOnClickListener {
+        val onCLick = View.OnClickListener() {
             while (!fullhdImagesDownloads.isEmpty()) {
                 val cur = fullhdImagesDownloads.poll()
                 cur?.cancel(true)
             }
             it.visibility = View.GONE
-            if (it is ImageView) {
-                it.setImageResource(R.drawable.no_image)
-            }
         }
+        fullhd_image.setOnClickListener(onCLick)
+        fullhd_image_downloading_progressbar.setOnClickListener(onCLick)
+
 
         myRecyclerView.apply {
             layoutManager = viewManager
             adapter = ImageAdapter(imagesList) {
-                fullhdImagesDownloads.add(DownloadImage(fullhd_image))
+                fullhdImagesDownloads.add(
+                    DownloadImage(
+                        fullhd_image,
+                        listOf<View>(fullhd_image_downloading_progressbar)
+                    )
+                )
                 fullhdImagesDownloads.peek()?.execute(it.fullLink)
-                fullhd_image.visibility = View.VISIBLE
+                fullhd_image_downloading_progressbar.visibility = View.VISIBLE
             }
         }
 
