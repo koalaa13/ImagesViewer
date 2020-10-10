@@ -32,6 +32,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        ImagesGetter(imagesList, myRecyclerView.adapter).execute()
+        if (imagesList.isEmpty()) {
+            ImagesGetter(imagesList, myRecyclerView.adapter).execute()
+        }
     }
 }
