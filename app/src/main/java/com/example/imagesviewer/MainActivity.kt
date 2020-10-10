@@ -7,8 +7,6 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fullhd_image.*
-import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
 class MainActivity : AppCompatActivity() {

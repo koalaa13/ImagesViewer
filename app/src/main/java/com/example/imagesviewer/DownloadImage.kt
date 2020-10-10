@@ -25,9 +25,11 @@ class DownloadImage(
         Log.i(TAG, "doInBackground, size of imagesMap is ${imagesMap.size}")
         return try {
             val urlString = params[0]!!
-            if (!imagesMap.contains(urlString)) {
+            if (!imagesMap.containsKey(urlString)) {
                 val url = URL(urlString)
                 imagesMap[urlString] = BitmapFactory.decodeStream(url.openStream())
+            } else {
+                Log.i(TAG, "Used already downloaded image")
             }
             urlString
         } catch (e: IOException) {
