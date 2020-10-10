@@ -20,14 +20,13 @@ class FullScreenImageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fullhd_image)
         Log.i(TAG, "onCreate")
-        val closeFullScreen = Intent(this, MainActivity::class.java)
 
         val onCLick = View.OnClickListener() {
             while (!fullhdImagesDownloads.isEmpty()) {
                 val cur = fullhdImagesDownloads.poll()
                 cur?.cancel(true)
             }
-            startActivity(closeFullScreen)
+            finish()
         }
         fullhd_image.setOnClickListener(onCLick)
         fullhd_image_downloading_progressbar.setOnClickListener(onCLick)
