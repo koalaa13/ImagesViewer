@@ -1,18 +1,15 @@
 package com.example.imagesviewer
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.concurrent.ConcurrentHashMap
 
 class MainActivity : AppCompatActivity() {
     companion object {
         const val TAG = "MainActivity"
-        var imagesMap = ConcurrentHashMap<String, Bitmap>()
         private var imagesList = emptyList<Image>().toMutableList()
     }
 
@@ -25,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         myRecyclerView.apply {
             layoutManager = viewManager
-            adapter = ImageAdapter(imagesList, imagesMap) {
+            adapter = ImageAdapter(imagesList) {
                 startActivity(openFullScreen.apply {
                     putExtra("linkToDownload", it.fullLink)
                 })

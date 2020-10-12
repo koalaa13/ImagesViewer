@@ -1,16 +1,13 @@
 package com.example.imagesviewer
 
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_item.view.*
-import java.util.concurrent.ConcurrentHashMap
 
 class ImageAdapter(
     private val images: List<Image>,
-    private val imagesMap: ConcurrentHashMap<String, Bitmap>,
     private val onClick: (Image) -> Unit
 ) :
     RecyclerView.Adapter<ImageViewHolder>() {
@@ -33,7 +30,6 @@ class ImageAdapter(
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val curImage = images[position]
         DownloadImage(
-            imagesMap,
             holder.root.thumb_image,
             listOf(holder.root.thumb_image_downloading_progressbar)
         ).execute(curImage.thumbLink)

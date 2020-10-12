@@ -12,12 +12,12 @@ import java.util.concurrent.ConcurrentHashMap
 
 
 class DownloadImage(
-    private val imagesMap: ConcurrentHashMap<String, Bitmap>,
     private val image: ImageView,
     private val toMakeInvisible: List<View>
 ) :
     AsyncTask<String, Unit, String?>() {
     companion object {
+        private val imagesMap = ConcurrentHashMap<String, Bitmap>()
         const val TAG = "DownloadImage"
     }
 

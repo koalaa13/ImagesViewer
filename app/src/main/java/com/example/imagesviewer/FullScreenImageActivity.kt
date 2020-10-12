@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.imagesviewer.MainActivity.Companion.imagesMap
 import kotlinx.android.synthetic.main.fullhd_image.*
 import java.util.*
 
@@ -32,7 +31,6 @@ class FullScreenImageActivity : AppCompatActivity() {
 
         fullhdImagesDownloads.add(
             DownloadImage(
-                imagesMap,
                 fullhd_image,
                 listOf(fullhd_image_downloading_progressbar)
             )
